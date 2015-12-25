@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="K1DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Act">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="building" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="agreement" Type="Int32" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="idref" Type="Int32" />
+    <NavigationProperty Name="Act1" Relationship="Self.FK_Act_Act" FromRole="Act" ToRole="Act1" />
+    <NavigationProperty Name="Act2" Relationship="Self.FK_Act_Act" FromRole="Act1" ToRole="Act" />
+    <NavigationProperty Name="Catalogs" Relationship="Self.FK_Catalog_Act" FromRole="Act" ToRole="Catalog" />
+  </EntityType>
+  <EntityType Name="Catalog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idstuff" Type="Int32" />
+    <Property Name="idact" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tech" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Act" Relationship="Self.FK_Catalog_Act" FromRole="Catalog" ToRole="Act" />
+    <NavigationProperty Name="Stuff" Relationship="Self.FK_Catalog_Stuff" FromRole="Catalog" ToRole="Stuff" />
+  </EntityType>
+  <EntityType Name="Stuff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="properties" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="amount" Type="Int32" />
+    <NavigationProperty Name="Catalogs" Relationship="Self.FK_Catalog_Stuff" FromRole="Stuff" ToRole="Catalog" />
+  </EntityType>
+  <Association Name="FK_Act_Act">
+    <End Role="Act" Type="Self.Act" Multiplicity="0..1" />
+    <End Role="Act1" Type="Self.Act" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Act">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Act1">
+        <PropertyRef Name="idref" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Catalog_Act">
+    <End Role="Act" Type="Self.Act" Multiplicity="0..1" />
+    <End Role="Catalog" Type="Self.Catalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Act">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Catalog">
+        <PropertyRef Name="idact" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Catalog_Stuff">
+    <End Role="Stuff" Type="Self.Stuff" Multiplicity="0..1" />
+    <End Role="Catalog" Type="Self.Catalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stuff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Catalog">
+        <PropertyRef Name="idstuff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="K1DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Acts" EntityType="Self.Act" />
+    <EntitySet Name="Catalogs" EntityType="Self.Catalog" />
+    <EntitySet Name="Stuffs" EntityType="Self.Stuff" />
+    <AssociationSet Name="FK_Act_Act" Association="Self.FK_Act_Act">
+      <End Role="Act" EntitySet="Acts" />
+      <End Role="Act1" EntitySet="Acts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Catalog_Act" Association="Self.FK_Catalog_Act">
+      <End Role="Act" EntitySet="Acts" />
+      <End Role="Catalog" EntitySet="Catalogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Catalog_Stuff" Association="Self.FK_Catalog_Stuff">
+      <End Role="Stuff" EntitySet="Stuffs" />
+      <End Role="Catalog" EntitySet="Catalogs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

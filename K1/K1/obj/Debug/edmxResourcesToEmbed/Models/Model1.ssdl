@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище K1DBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Act">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="ntext" />
+    <Property Name="building" Type="ntext" />
+    <Property Name="agreement" Type="int" />
+    <Property Name="date" Type="date" />
+    <Property Name="idref" Type="int" />
+  </EntityType>
+  <EntityType Name="Catalog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idstuff" Type="int" />
+    <Property Name="idact" Type="int" />
+    <Property Name="name" Type="ntext" />
+    <Property Name="tech" Type="ntext" />
+    <Property Name="date" Type="date" />
+  </EntityType>
+  <EntityType Name="Stuff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="ntext" />
+    <Property Name="properties" Type="ntext" />
+    <Property Name="amount" Type="int" />
+  </EntityType>
+  <Association Name="FK_Act_Act">
+    <End Role="Act" Type="Self.Act" Multiplicity="0..1" />
+    <End Role="Act1" Type="Self.Act" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Act">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Act1">
+        <PropertyRef Name="idref" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Catalog_Act">
+    <End Role="Act" Type="Self.Act" Multiplicity="0..1" />
+    <End Role="Catalog" Type="Self.Catalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Act">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Catalog">
+        <PropertyRef Name="idact" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Catalog_Stuff">
+    <End Role="Stuff" Type="Self.Stuff" Multiplicity="0..1" />
+    <End Role="Catalog" Type="Self.Catalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stuff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Catalog">
+        <PropertyRef Name="idstuff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище K1DBModelContainer">
+    <EntitySet Name="Act" EntityType="Self.Act" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Catalog" EntityType="Self.Catalog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stuff" EntityType="Self.Stuff" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Act_Act" Association="Self.FK_Act_Act">
+      <End Role="Act" EntitySet="Act" />
+      <End Role="Act1" EntitySet="Act" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Catalog_Act" Association="Self.FK_Catalog_Act">
+      <End Role="Act" EntitySet="Act" />
+      <End Role="Catalog" EntitySet="Catalog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Catalog_Stuff" Association="Self.FK_Catalog_Stuff">
+      <End Role="Stuff" EntitySet="Stuff" />
+      <End Role="Catalog" EntitySet="Catalog" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

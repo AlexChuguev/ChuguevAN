@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище K1DBModelContainer" CdmEntityContainer="K1DBEntities">
+    <EntitySetMapping Name="Acts">
+      <EntityTypeMapping TypeName="K1DBModel.Act">
+        <MappingFragment StoreEntitySet="Act">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="building" ColumnName="building" />
+          <ScalarProperty Name="agreement" ColumnName="agreement" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="idref" ColumnName="idref" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Catalogs">
+      <EntityTypeMapping TypeName="K1DBModel.Catalog">
+        <MappingFragment StoreEntitySet="Catalog">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="idstuff" ColumnName="idstuff" />
+          <ScalarProperty Name="idact" ColumnName="idact" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="tech" ColumnName="tech" />
+          <ScalarProperty Name="date" ColumnName="date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stuffs">
+      <EntityTypeMapping TypeName="K1DBModel.Stuff">
+        <MappingFragment StoreEntitySet="Stuff">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="properties" ColumnName="properties" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

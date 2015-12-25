@@ -1,0 +1,58 @@
+﻿@model K1.Models.Act
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Act</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.building)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.building)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.agreement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.agreement)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Act2.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Act2.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

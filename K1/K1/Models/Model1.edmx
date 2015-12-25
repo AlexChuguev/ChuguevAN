@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище K1DBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Act">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="ntext" />
+          <Property Name="building" Type="ntext" />
+          <Property Name="agreement" Type="int" />
+          <Property Name="date" Type="date" />
+          <Property Name="idref" Type="int" />
+        </EntityType>
+        <EntityType Name="Catalog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idstuff" Type="int" />
+          <Property Name="idact" Type="int" />
+          <Property Name="name" Type="ntext" />
+          <Property Name="tech" Type="ntext" />
+          <Property Name="date" Type="date" />
+        </EntityType>
+        <EntityType Name="Stuff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="ntext" />
+          <Property Name="properties" Type="ntext" />
+          <Property Name="amount" Type="int" />
+        </EntityType>
+        <Association Name="FK_Act_Act">
+          <End Role="Act" Type="Self.Act" Multiplicity="0..1" />
+          <End Role="Act1" Type="Self.Act" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Act">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Act1">
+              <PropertyRef Name="idref" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Catalog_Act">
+          <End Role="Act" Type="Self.Act" Multiplicity="0..1" />
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Act">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Catalog">
+              <PropertyRef Name="idact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Catalog_Stuff">
+          <End Role="Stuff" Type="Self.Stuff" Multiplicity="0..1" />
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stuff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Catalog">
+              <PropertyRef Name="idstuff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище K1DBModelContainer">
+          <EntitySet Name="Act" EntityType="Self.Act" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Catalog" EntityType="Self.Catalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stuff" EntityType="Self.Stuff" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Act_Act" Association="Self.FK_Act_Act">
+            <End Role="Act" EntitySet="Act" />
+            <End Role="Act1" EntitySet="Act" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Catalog_Act" Association="Self.FK_Catalog_Act">
+            <End Role="Act" EntitySet="Act" />
+            <End Role="Catalog" EntitySet="Catalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Catalog_Stuff" Association="Self.FK_Catalog_Stuff">
+            <End Role="Stuff" EntitySet="Stuff" />
+            <End Role="Catalog" EntitySet="Catalog" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="K1DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Act">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="building" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="agreement" Type="Int32" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="idref" Type="Int32" />
+          <NavigationProperty Name="Act1" Relationship="Self.FK_Act_Act" FromRole="Act" ToRole="Act1" />
+          <NavigationProperty Name="Act2" Relationship="Self.FK_Act_Act" FromRole="Act1" ToRole="Act" />
+          <NavigationProperty Name="Catalogs" Relationship="Self.FK_Catalog_Act" FromRole="Act" ToRole="Catalog" />
+        </EntityType>
+        <EntityType Name="Catalog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idstuff" Type="Int32" />
+          <Property Name="idact" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tech" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Act" Relationship="Self.FK_Catalog_Act" FromRole="Catalog" ToRole="Act" />
+          <NavigationProperty Name="Stuff" Relationship="Self.FK_Catalog_Stuff" FromRole="Catalog" ToRole="Stuff" />
+        </EntityType>
+        <EntityType Name="Stuff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="properties" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="amount" Type="Int32" />
+          <NavigationProperty Name="Catalogs" Relationship="Self.FK_Catalog_Stuff" FromRole="Stuff" ToRole="Catalog" />
+        </EntityType>
+        <Association Name="FK_Act_Act">
+          <End Role="Act" Type="Self.Act" Multiplicity="0..1" />
+          <End Role="Act1" Type="Self.Act" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Act">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Act1">
+              <PropertyRef Name="idref" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Catalog_Act">
+          <End Role="Act" Type="Self.Act" Multiplicity="0..1" />
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Act">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Catalog">
+              <PropertyRef Name="idact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Catalog_Stuff">
+          <End Role="Stuff" Type="Self.Stuff" Multiplicity="0..1" />
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stuff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Catalog">
+              <PropertyRef Name="idstuff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="K1DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Acts" EntityType="Self.Act" />
+          <EntitySet Name="Catalogs" EntityType="Self.Catalog" />
+          <EntitySet Name="Stuffs" EntityType="Self.Stuff" />
+          <AssociationSet Name="FK_Act_Act" Association="Self.FK_Act_Act">
+            <End Role="Act" EntitySet="Acts" />
+            <End Role="Act1" EntitySet="Acts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Catalog_Act" Association="Self.FK_Catalog_Act">
+            <End Role="Act" EntitySet="Acts" />
+            <End Role="Catalog" EntitySet="Catalogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Catalog_Stuff" Association="Self.FK_Catalog_Stuff">
+            <End Role="Stuff" EntitySet="Stuffs" />
+            <End Role="Catalog" EntitySet="Catalogs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище K1DBModelContainer" CdmEntityContainer="K1DBEntities">
+          <EntitySetMapping Name="Acts">
+            <EntityTypeMapping TypeName="K1DBModel.Act">
+              <MappingFragment StoreEntitySet="Act">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="building" ColumnName="building" />
+                <ScalarProperty Name="agreement" ColumnName="agreement" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="idref" ColumnName="idref" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Catalogs">
+            <EntityTypeMapping TypeName="K1DBModel.Catalog">
+              <MappingFragment StoreEntitySet="Catalog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="idstuff" ColumnName="idstuff" />
+                <ScalarProperty Name="idact" ColumnName="idact" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="tech" ColumnName="tech" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stuffs">
+            <EntityTypeMapping TypeName="K1DBModel.Stuff">
+              <MappingFragment StoreEntitySet="Stuff">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="properties" ColumnName="properties" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
