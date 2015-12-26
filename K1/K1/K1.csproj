@@ -179,6 +179,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StuffsController.cs" />
+    <Compile Include="DAO\DAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -197,9 +198,6 @@
     </Compile>
     <Compile Include="Models\AspNetUserLogin.cs">
       <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserRoles.cs">
-      <DependentUpon>Model5.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Catalog.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -239,21 +237,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model2.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model5.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model5.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model5.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model5.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model5.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model5.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\Stuff.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -292,16 +275,6 @@
       <DependentUpon>Model2.edmx</DependentUpon>
       <LastGenOutput>Model2.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Model5.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model5.edmx</DependentUpon>
-      <LastGenOutput>Model5.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Model5.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model5.edmx</DependentUpon>
-      <LastGenOutput>Model5.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\Model1.edmx">
@@ -310,13 +283,6 @@
     </EntityDeploy>
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\Model5.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model5.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model5.edmx.diagram">
-      <DependentUpon>Model5.edmx</DependentUpon>
     </Content>
     <EntityDeploy Include="Models\Model2.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -396,6 +362,7 @@
     <Content Include="Views\AspNetUsers\Details.cshtml" />
     <Content Include="Views\AspNetUsers\Edit.cshtml" />
     <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\Stuffs\Create1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -408,10 +375,7 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Default\" />
-    <Folder Include="Views\s\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

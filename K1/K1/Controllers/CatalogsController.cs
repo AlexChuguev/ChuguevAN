@@ -7,18 +7,29 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using K1.Models;
+using K1.DAO;
+
 
 namespace K1.Controllers
 {
     public class CatalogsController : Controller
     {
         private K1DBEntities db = new K1DBEntities();
+        private DAOa d = new DAOa();
+   
 
         // GET: Catalogs
-        public ActionResult Index()
+        public ActionResult Index(String na)
         {
-            var catalogs = db.Catalogs.Include(c => c.Act).Include(c => c.Stuff);
-            return View(catalogs.ToList());
+            var search = from s in db.Catalogs select s;
+
+            if (!String.IsNullOrEmpty(na))
+            {
+                search = search.Where(c => c.idact.ToString().Contains(na));
+            }
+
+            return View(search);
+            
         }
 
         // GET: Catalogs/Details/5
@@ -45,6 +56,11 @@ namespace K1.Controllers
             ViewBag.idstuff = new SelectList(db.Stuffs, "Id", "Id");
             return View();
         }
+
+   
+
+
+
 
         // POST: Catalogs/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 

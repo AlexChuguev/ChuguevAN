@@ -8,6 +8,12 @@
 
 <p>
     @Html.ActionLink("Добавить материал", "Create")
+    @using (Html.BeginForm())
+    {
+    <p>
+         @Html.TextBox("na")   <input type="submit" value="Найти материал" />
+    </p>
+    }
 </p>
 <table class="table">
     <tr>

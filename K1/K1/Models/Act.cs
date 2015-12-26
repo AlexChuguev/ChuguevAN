@@ -11,7 +11,7 @@ namespace K1.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class Act
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,18 +20,12 @@ namespace K1.Models
             this.Act1 = new HashSet<Act>();
             this.Catalogs = new HashSet<Catalog>();
         }
-        [Key]
-        [Display(Name = "Номер акта")]
+    
         public int Id { get; set; }
-        [Display(Name = "Название акта")]
         public string name { get; set; }
-        [Display(Name = "Название объекта")]
         public string building { get; set; }
-        [Display(Name = "Согласование")]
         public Nullable<int> agreement { get; set; }
-        [Display(Name = "Дата согласования")]
         public Nullable<System.DateTime> date { get; set; }
-
         public Nullable<int> idref { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

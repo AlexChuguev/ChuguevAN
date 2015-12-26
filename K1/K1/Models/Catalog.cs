@@ -11,19 +11,14 @@ namespace K1.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class Catalog
     {
-        [Key]
-        [Display(Name = "Номер каталога")]
         public int Id { get; set; }
         public Nullable<int> idstuff { get; set; }
         public Nullable<int> idact { get; set; }
-        [Display(Name = "Название материала")]
         public string name { get; set; }
-        [Display(Name = "Техника на которую используется материал")]
         public string tech { get; set; }
-        [Display(Name = "Дата использования")]
         public Nullable<System.DateTime> date { get; set; }
     
         public virtual Act Act { get; set; }

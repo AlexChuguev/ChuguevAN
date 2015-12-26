@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using K1.Models;
+using K1.DAO;
 
 
 namespace K1.Controllers
@@ -16,12 +17,19 @@ namespace K1.Controllers
     public class StuffsController : Controller
     {
         private K1DBEntities db = new K1DBEntities();
-
+        private DAOa v = new DAOa();
         // GET: Stuffs
-        public ActionResult Index()
+        public ActionResult Index(String na)
         {
-            return View(db.Stuffs.ToList());
+            var search = from s in db.Stuffs select s;
+            if (!String.IsNullOrEmpty(na))
+            {
+                search = search.Where(c => c.name.Contains(na));
+            }
+            return View(search);
         }
+
+
 
         // GET: Stuffs/Details/5
         public ActionResult Details(int? id)
@@ -62,6 +70,10 @@ namespace K1.Controllers
 
             return View(stuff);
         }
+
+        // POST: Stuffs/Create1
+    
+        
         [Authorize(Roles = "Accounter")]
         // GET: Stuffs/Edit/5
         public ActionResult Edit(int? id)
